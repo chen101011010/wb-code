@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "cross": "^1.0.0",
-    "nodemon": "^1.19.1"
+    "nodemon": "^1.19.1",
+    "redis": "^3.1.2"
   }
 }
