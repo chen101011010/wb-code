@@ -6,7 +6,7 @@
     "start": "node bin/www",
     "dev": "./node_modules/.bin/nodemon bin/www",
     "prd": "pm2 start bin/www",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --runInBand --forceExit --colors"
   },
   "dependencies": {
     "debug": "^4.1.1",
@@ -25,7 +25,9 @@
   },
   "devDependencies": {
     "cross": "^1.0.0",
+    "jest": "^27.0.6",
     "nodemon": "^1.19.1",
-    "redis": "^3.1.2"
+    "redis": "^3.1.2",
+    "supertest": "^6.1.4"
   }
 }
