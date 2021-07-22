@@ -8,11 +8,11 @@ const { REDIS_CONF } = require('../conf/db');
 //创建一个客户端
 
 const redisClint = redis.createClient(
-    REDIS_CONF.port,
-    REDIS_CONF.host
+  REDIS_CONF.port,
+  REDIS_CONF.host
 )
 redisClint.on('error', err => {
-    console.log('redis err', err);
+  console.log('redis err', err);
 })
 
 /**
@@ -22,11 +22,11 @@ redisClint.on('error', err => {
  * @param {number} timeout 过期时间,单位s
  */
 function set(key, value, timeout = 60 * 60) {
-    if (typeof value === 'object') {
-        value = JSON.stringify(value)
-    }
-    redisClint.set(key, value);
-    redisClint.expire(key, timeout);
+  if (typeof value === 'object') {
+    value = JSON.stringify(value)
+  }
+  redisClint.set(key, value);
+  redisClint.expire(key, timeout);
 }
 
 /**
@@ -35,24 +35,24 @@ function set(key, value, timeout = 60 * 60) {
  * @returns {promise} value 
  */
 function get(key) {
-    return new Promise((resolve, reject) => {
-        redisClint.get(key, (err, val) => {
-            if (err) {
-                return reject(err);
-            }
-            if (val == null) {
-                return resolve(null);
-            }
-            try {
-                resolve(JSON.parse(val));
-            } catch (e) {
-                resolve(val);
-            }
-        })
+  return new Promise((resolve, reject) => {
+    redisClint.get(key, (err, val) => {
+      if (err) {
+        return reject(err);
+      }
+      if (val == null) {
+        return resolve(null);
+      }
+      try {
+        resolve(JSON.parse(val));
+      } catch (e) {
+        resolve(val);
+      }
     })
+  })
 }
 
 module.exports = {
-    get,
-    set
+  get,
+  set
 }
