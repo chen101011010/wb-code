@@ -9,7 +9,9 @@ const session = require('koa-generic-session');
 const redisStore = require('koa-redis');
 const index = require('./routes/index');
 const userViewRouter = require('./routes/view/user');
+const userApiRouter = require('./routes/api/user');
 const errorViewRouter = require('./routes/view/error');
+
 const { REDIS_CONF } = require('./conf/db');
 const { isProd, isDev } = require('./utils/env');
 // error handle,r
@@ -52,9 +54,10 @@ app.use(async (ctx, next) => {
 
 // routes
 
-app.use(index.routes(), index.allowedMethods())
-app.use(userViewRouter.routes(), userViewRouter.allowedMethods())
-app.use(errorViewRouter.routes(), errorViewRouter.allowedMethods())
+app.use(index.routes(), index.allowedMethods());
+app.use(userViewRouter.routes(), userViewRouter.allowedMethods());
+app.use(userApiRouter.routes(), userApiRouter.allowedMethods());
+app.use(errorViewRouter.routes(), errorViewRouter.allowedMethods());
 
 
 // error-handling
