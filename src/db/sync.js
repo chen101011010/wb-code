@@ -4,6 +4,7 @@
  */
 
 const seq = require('./sequelize');
+const User = require('./module/index');
 seq.authenticate()
   .then(() => {
     console.log('ok');
