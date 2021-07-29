@@ -3,7 +3,7 @@
  * @author cyq
  */
 const User = require('./user');
-
-module.export = {
+console.log(User);
+module.exports = {
   User
 }

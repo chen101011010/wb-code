@@ -3,12 +3,12 @@
  * @author cyq
  */
 
-const Sequelize = require('sequelize');
+const { DataTypes } = require('sequelize');
 
 module.exports = {
-  STRING: Sequelize.STRING,
-  DECIMAL: Sequelize.DECIMAL,
-  TEXT: Sequelize.TEXT,
-  INTEGER: Sequelize.INTEGER,
-  BOOLEAN: Sequelize.BOOLEAN
+  STRING: DataTypes.STRING,
+  DECIMAL: DataTypes.DECIMAL,
+  TEXT: DataTypes.TEXT,
+  INTEGER: DataTypes.INTEGER,
+  BOOLEAN: DataTypes.BOOLEAN
 }
