@@ -14,6 +14,7 @@ const errorViewRouter = require('./routes/view/error');
 
 const { REDIS_CONF } = require('./conf/db');
 const { isProd, isDev } = require('./utils/env');
+const { SESSION_SECRTE_KEY } = require('./conf/crypKeys');
 // error handle,r
 onerror(app);
 
@@ -22,7 +23,7 @@ app.use(bodyparser({
   enableTypes:['json', 'form', 'text']
 }))
 // session 配置
-app.keys = ['Uisdf_50327'];
+app.keys = [SESSION_SECRTE_KEY];
 app.use(session({
   key: 'wb.sid', // cookie name 默认是  koa.sid
   prefix: 'wb:sess:', // redis key的前缀   默认 koa:sess:

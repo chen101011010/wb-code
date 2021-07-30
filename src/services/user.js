@@ -30,6 +30,34 @@ async function getUserInfo(userName, passWord) {
   return formatRes;
 }
 
+/**
+ * 创建用户
+ * @param {string}} userName 用户名
+ * @param {string}} password 密码
+ * @param {number}} gender 性别
+ * @param {string}} nickName 昵称
+ */
+async function createUser({ userName, passWord, gender = 3, nickName }) {
+  
+  const result = await User.create({
+    userName,
+    passWord,
+    gender,
+    nickName: nickName ? nickName : userName
+  })
+  return result.dataValues;
+}
+
+async function deleteUser(userName) {
+  const result = await User.destroy({
+    where: {
+      userName
+    }
+  })
+  return result > 0;
+}
 module.exports = {
-  getUserInfo
+  getUserInfo,
+  createUser,
+  deleteUser
 }

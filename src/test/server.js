@@ -4,7 +4,7 @@
  */
 const request = require('supertest');
 
-const server = require('../src/app').callback();
+const server = require('../app').callback();
 
 module.exports = request(server);
 
