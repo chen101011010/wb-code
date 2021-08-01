@@ -3,6 +3,8 @@
  * @author cyq
  */
 
+const { loginRedirect } = require('../../middlewares/loginChecks');
+
 const router = require('koa-router')();
 /**
  * 获取用户信息
@@ -27,6 +29,10 @@ router.get('/login', async (ctx, next) => {
 
 router.get('/register', async (ctx, next) => {
   await ctx.render('register', {});
+})
+
+router.get('/setting', loginRedirect, async (ctx, next) => {
+  await ctx.render('setting', ctx.session.userInfo );
 })
 
 module.exports = router;

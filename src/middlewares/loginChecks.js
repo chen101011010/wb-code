@@ -12,10 +12,10 @@ const { ErrorModel } = require('../module/ResModule');
  */
 async function loginCheck(ctx, next) {
   if (ctx.session && ctx.session.userInfo) {
-    await next();
+    return await next();
   }
   ctx.body = new ErrorModel({
-    error: 10005,
+    errno: 10005,
     message: '您尚未登录'
   })
 }
@@ -26,11 +26,10 @@ async function loginCheck(ctx, next) {
  * @param {function} next next
  */
 async function loginRedirect(ctx, next) {
-  console.log('gagaga');
-  console.log('diaoyong loginRedirect 方法----------------------------------');
   if (ctx.session && ctx.session.userInfo) {
-    await next();
+    return await next();
   }
+
   const curUrl = ctx.url;
   ctx.redirect('/login?url=' + encodeURIComponent(curUrl));
 }
