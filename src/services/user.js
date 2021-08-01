@@ -38,7 +38,7 @@ async function getUserInfo(userName, passWord) {
  * @param {string}} nickName 昵称
  */
 async function createUser({ userName, passWord, gender = 3, nickName }) {
-  
+
   const result = await User.create({
     userName,
     passWord,
@@ -56,8 +56,46 @@ async function deleteUser(userName) {
   })
   return result > 0;
 }
+
+/**
+ * 
+ * @param {objcct} { newPassWord, newCity, newNickName, newPicture } 要更改的用户信息
+ * @param {object} { userName, passWord } 要修改的用户
+ */
+async function updateUser(
+  { newPassWord, newCity, newNickName, newPicture },
+  { userName, passWord }
+) {
+  const updateData = {};
+  if (newPassWord) {
+    updateData.passWord = newPassWord;
+  }
+  if (newCity) {
+    updateData.city = newCity;
+  }
+  if (newNickName) {
+    updateData.nickName = newNickName;
+  }
+  if (newPicture) {
+    updateData.picture = newPicture;
+  }
+
+  const whereData = {
+    userName
+  }
+  if (passWord) {
+    whereData.passWord = passWord;
+  }
+  console.log(updateData);
+  const result = await User.update(updateData, {
+    where: whereData
+  })
+  return result[0] > 0;
+  
+}
 module.exports = {
   getUserInfo,
   createUser,
-  deleteUser
+  deleteUser,
+  updateUser
 }

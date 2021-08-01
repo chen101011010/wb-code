@@ -2,7 +2,7 @@
  * @description user controller
  * @author cyq
  */
-const { getUserInfo, createUser, deleteUser } = require('../services/user');
+const { getUserInfo, createUser, deleteUser, updateUser } = require('../services/user');
 const { SuccessModel, ErrorModel } = require('../module/ResModule');
 const { doCrypto } = require('../utils/cryp');
 /**
@@ -93,10 +93,49 @@ async function deleteCurrentUser (userName) {
   }
 }
 
+/**
+ * 修改用户信息
+ * @param {object} ctx koa ctx
+ * @param {string} nickName 昵称
+ * @param {string} city 城市
+ * @param {picture} picture 头像
+ */
+async function changeInfo(ctx, { nickName, city, picture }) {
+  const { userName } = ctx.session.userInfo;
+  if (!nickName) {
+    nickName = userName;
+  }
+  //service 
+  const result = await updateUser({
+    newNickName: nickName,
+    newCity: city,
+    newPicture: picture
+  }, {
+    userName
+  })
+
+  if (result) {
+    Object.assign(ctx.session.userInfo, {
+      nickName,
+      city,
+      picture
+    })
+    return new SuccessModel()
+  } else {
+    return new ErrorModel({
+      errno: 10008,
+      message: '修改信息失败'
+    })
+  }
+
+  
+}
+
 module.exports = {
   isExist,
   register,
   login,
-  deleteCurrentUser
+  deleteCurrentUser,
+  changeInfo
 }
 
