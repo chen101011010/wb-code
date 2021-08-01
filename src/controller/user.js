@@ -127,15 +127,43 @@ async function changeInfo(ctx, { nickName, city, picture }) {
       message: '修改信息失败'
     })
   }
-
-  
 }
 
+/**
+ * 
+ * @param {*} userName 用户名
+ * @param {*} passWord 密码
+ * @param {*} newPassword 新密码
+ * @returns 
+ */
+async function changePassword(userName, passWord, newPassword) {
+  const result = await updateUser({
+    newPassWord: doCrypto(newPassword)
+  },{
+    userName,
+    passWord: doCrypto(passWord)
+  });
+  console.log(result);
+  if (result) {
+    return new SuccessModel()
+  } else {
+    return new ErrorModel({
+      errno: 10006,
+      message: '修改密码失败'
+    })
+  }
+}
+async function logout(ctx) {
+  delete ctx.session.userInfo;
+  return new SuccessModel();
+}
 module.exports = {
   isExist,
   register,
   login,
   deleteCurrentUser,
-  changeInfo
+  changeInfo,
+  changePassword,
+  logout
 }
 

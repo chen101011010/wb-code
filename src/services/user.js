@@ -90,6 +90,7 @@ async function updateUser(
   const result = await User.update(updateData, {
     where: whereData
   })
+  console.log(result);
   return result[0] > 0;
   
 }
