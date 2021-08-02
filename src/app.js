@@ -8,7 +8,8 @@ const bodyparser = require('koa-bodyparser');
 const logger = require('koa-logger');
 const session = require('koa-generic-session');
 const redisStore = require('koa-redis');
-const index = require('./routes/index');
+const blogViewRouter = require('./routes/view/blog');
+const blogApiRouter = require('./routes/api/blog-home');
 const userViewRouter = require('./routes/view/user');
 const userApiRouter = require('./routes/api/user');
 const utilsApiRouter = require('./routes/api/utils');
@@ -51,7 +52,8 @@ app.use(views(__dirname + '/views', {
 
 // routes
 
-app.use(index.routes(), index.allowedMethods());
+app.use(blogViewRouter.routes(), blogViewRouter.allowedMethods());
+app.use(blogApiRouter.routes(), blogApiRouter.allowedMethods());
 app.use(userViewRouter.routes(), userViewRouter.allowedMethods());
 app.use(userApiRouter.routes(), userApiRouter.allowedMethods());
 app.use(utilsApiRouter.routes(), utilsApiRouter.allowedMethods());

@@ -3,7 +3,6 @@
  * @author cyq
  */
 
-const { log } = require('debug');
 const { ErrorModel } = require('../module/ResModule');
 /**
  * 
