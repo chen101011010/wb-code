@@ -3,7 +3,14 @@
  * @author cyq
  */
 const User = require('./user');
-console.log(User);
+const Blog = require('./blogs');
+
+Blog.belongsTo(User, {
+  foreignKey: 'userId',
+  onDelete: 'CASCADE',
+  onUpdate: 'CASCADE'
+})
 module.exports = {
-  User
+  User,
+  Blog
 }

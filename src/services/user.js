@@ -86,7 +86,9 @@ async function updateUser(
   if (passWord) {
     whereData.passWord = passWord;
   }
+  console.log('11111111111111111111111111111');
   console.log(updateData);
+  console.log(whereData);
   const result = await User.update(updateData, {
     where: whereData
   })
