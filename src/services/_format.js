@@ -10,7 +10,7 @@ const { DEFAULT_PICTURE } = require('../conf/constant');
  */
 function _formatUserPicture(obj) {
   if (obj.picture == null) {
-    obj.picture = 'xxx'
+    obj.picture = '/2.jpg'
   }
   return obj;
 }
