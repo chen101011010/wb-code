@@ -4,7 +4,7 @@
  * @author cyq
  */
 const seq = require('../sequelize');
-const { STRING, DECIMAL, TEXT, INTEGER } = require('../types');
+const { STRING, TEXT, INTEGER } = require('../types');
 
 const Blog = seq.define('blog', {
   userId: {
@@ -22,5 +22,6 @@ const Blog = seq.define('blog', {
     comment: '图片地址'
   }
 })
+
 
 module.exports = Blog;

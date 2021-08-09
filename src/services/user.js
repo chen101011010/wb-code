@@ -4,6 +4,7 @@
  */
 const { User } = require('../db/module/index');
 const { formatUser } = require('./_format');
+const { addFollower } = require('./user-relation');
 
 /**
  * 
@@ -45,6 +46,10 @@ async function createUser({ userName, passWord, gender = 3, nickName }) {
     gender,
     nickName: nickName ? nickName : userName
   })
+
+  //自己关注自己
+  const userId = result.dataValues.id;
+  await addFollower(userId, userId);
   return result.dataValues;
 }
 
@@ -86,13 +91,9 @@ async function updateUser(
   if (passWord) {
     whereData.passWord = passWord;
   }
-  console.log('11111111111111111111111111111');
-  console.log(updateData);
-  console.log(whereData);
   const result = await User.update(updateData, {
     where: whereData
   })
-  console.log(result);
   return result[0] > 0;
   
 }

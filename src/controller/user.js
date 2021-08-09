@@ -143,7 +143,6 @@ async function changePassword(userName, passWord, newPassword) {
     userName,
     passWord: doCrypto(passWord)
   });
-  console.log(result);
   if (result) {
     return new SuccessModel()
   } else {

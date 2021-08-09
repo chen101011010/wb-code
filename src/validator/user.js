@@ -25,7 +25,7 @@ const schema = {
     city: {
       type: 'string',
       maxLength: 255,
-      minLength: 2
+      minLength: 0
     }
   }
 }
@@ -35,6 +35,7 @@ const schema = {
  * @returns 
  */
 function userValidate(data = {}) {
+  console.log(data);
   return _validate(schema, data);
 }
 

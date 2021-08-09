@@ -2,7 +2,7 @@
  * @description 数据格式化
  * @author cyq
  */
-const { DEFAULT_PICTURE } = require('../conf/constant');
+const { DEFAULT_PICTURE, REG_FOR_AT_WHO } = require('../conf/constant');
 /**
  * 用户默认头像
  * @param {object} 用户对象 
@@ -30,6 +30,19 @@ function formatUser(list) {
   return  _formatUserPicture(list);
 }
 
+/**
+ * 格式化微博数据
+ */
+
+function formatContent(obj){
+  obj.contentFormat = obj.content;
+  //格式化@ 
+  obj.contentFormat = obj.contentFormat.replace(REG_FOR_AT_WHO, (str, nickName, userName) => {
+    return `<a href="/profile/${userName}" >${nickName}</a>`
+  });
+  return obj;
+}
 module.exports = {
-  formatUser
+  formatUser,
+  formatContent
 }

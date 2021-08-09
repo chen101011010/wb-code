@@ -13,8 +13,7 @@ function genValidator (validatorFn) {
   return async function validator(ctx, next) {
     //校验 userValidate
     const data = ctx.request.body;
-    const error =  validatorFn(data);
-    console.log(error);
+    const error =  validatorFn(data);;
     if (error) {
       ctx.body = new ErrorModel({
         errno: 10009,
